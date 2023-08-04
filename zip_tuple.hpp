@@ -68,12 +68,12 @@ public:
         return tmp;
     }
 
-    auto operator!=(zip_iterator const & other)
+    auto operator!=(zip_iterator const & other) const
     {
         return !(*this == other);
     }
 
-    auto operator==(zip_iterator const & other)
+    auto operator==(zip_iterator const & other) const
     {
         auto result = false;
         return any_match(m_iters, other.m_iters);
