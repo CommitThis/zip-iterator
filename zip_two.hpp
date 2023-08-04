@@ -56,7 +56,7 @@ public:
         return tmp;
     }
 
-    auto operator!=(zip_iterator const & other)
+    auto operator!=(zip_iterator const & other) const
     {
         return !(*this == other);
     }
@@ -71,7 +71,7 @@ public:
         same time. Therefore we need to return true as soon as any of the 
         iterators are at their end position, terminating the iteration loop.
     */
-    auto operator==(zip_iterator const & other)
+    auto operator==(zip_iterator const & other) const
     {
         return 
             m_iter_1_begin == other.m_iter_1_begin ||
