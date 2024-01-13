@@ -25,7 +25,7 @@ auto any_match_impl(std::tuple<Args...> const & lhs,
     std::index_sequence<Index...>) -> bool
 {
     auto result = false;
-    result = (... | (std::get<Index>(lhs) == std::get<Index>(rhs)));
+    result = (... || (std::get<Index>(lhs) == std::get<Index>(rhs)));
     return result;
 }
 
