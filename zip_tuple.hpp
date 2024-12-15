@@ -11,13 +11,7 @@
 namespace c9 {
 
 template <typename Iter>
-using select_access_type_for = std::conditional_t<
-    std::is_same_v<Iter, std::vector<bool>::iterator> ||
-    std::is_same_v<Iter, std::vector<bool>::const_iterator>,
-    typename Iter::value_type,
-    typename Iter::reference
->;
-
+using select_access_type_for = std::remove_reference_t<decltype(*std::declval<Iter&>())>;
 
 template <typename ... Args, std::size_t ... Index>
 auto any_match_impl(std::tuple<Args...> const & lhs,
@@ -90,13 +84,8 @@ private:
     std::tuple<Iters...> m_iters;
 };
 
-
-/* std::decay needed because T is a reference, and is not a complete type */
 template <typename T>
-using select_iterator_for = std::conditional_t<
-    std::is_const_v<std::remove_reference_t<T>>, 
-    typename std::decay_t<T>::const_iterator,
-    typename std::decay_t<T>::iterator>;
+using select_iterator_for = decltype(std::begin(std::declval<T&>()));
 
 
 
