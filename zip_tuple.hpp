@@ -13,7 +13,7 @@
 namespace c9 {
 
 template <typename Iter>
-using select_access_type_for = std::remove_reference_t<decltype(*std::declval<Iter&>())>;
+using select_access_type_for = decltype(*std::declval<Iter&>());
 
 template <typename ... Args, std::size_t ... Index>
 auto any_match_impl(std::tuple<Args...> const & lhs,
