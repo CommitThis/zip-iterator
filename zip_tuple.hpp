@@ -13,7 +13,7 @@
 namespace c9 {
 
 template <typename Iter>
-using select_access_type_for = decltype(*std::declval<Iter&>());
+using select_access_type_for = typename std::iterator_traits<Iter>::reference;
 
 template <typename ... Args, std::size_t ... Index>
 auto any_match_impl(std::tuple<Args...> const & lhs,
@@ -88,7 +88,6 @@ private:
 
 template <typename T>
 using select_iterator_for = decltype(std::begin(std::declval<T&>()));
-
 
 
 template <typename ... T>
