@@ -165,3 +165,28 @@ TEST(ZipTuple, CanAssignToVectorOfBool)
     }
     EXPECT_EQ(result, expected);
 }
+
+
+
+
+template <typename T, std::size_t N>
+auto iter_ref(T (&arr)[N])
+{
+    for (auto && [i] : c9::zip(arr)) {
+        i = 0;
+    }
+}
+
+
+TEST(ZipTuple, CanIterateRawArrayReference)
+{
+    int raw[6] = {1, 2, 3, 4, 5, 6};
+    int expected[6] = {0, 0, 0, 0, 0, 0};
+    iter_ref(raw);
+    EXPECT_EQ(raw[0], 0);
+    EXPECT_EQ(raw[1], 0);
+    EXPECT_EQ(raw[2], 0);
+    EXPECT_EQ(raw[3], 0);
+    EXPECT_EQ(raw[4], 0);
+    EXPECT_EQ(raw[5], 0);
+}
